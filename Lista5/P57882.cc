@@ -14,8 +14,6 @@ int suma_divisors(int n){
 }
 
 int main(){
-	//cout << suma_divisors(132);
-	
 	
 	int n;
 	while(cin >> n){
