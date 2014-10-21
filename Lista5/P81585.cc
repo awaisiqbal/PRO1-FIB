@@ -6,7 +6,7 @@ int main(){
 	while(cin >> num){
 		
 		int sum = 0; //sum of all the numers introduced
-		int max = 0; //the max number in introduced
+		int max = -1; //the max number in introduced
 		for(int i = 0;i < num ; ++i){ 
 			int n = 0;
 			cin >> n;

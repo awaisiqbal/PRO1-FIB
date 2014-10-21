@@ -2,20 +2,29 @@
 using namespace std;
 
 int main(){
-	int numbersIntroduced;
-	cin >> numbersIntroduced;
-	for (int i = 0; i < numbersIntroduced ; ++i){
-		int nums, count = 0;
-		cin >> nums;
-		int lastDigit = nums;
-		while(nums != 0){
-			if(nums > lastDigit){
-				++count;
-			}
-			
-			lastDigit = nums;
-			cin >> nums;
+	int num = 0;
+	cin >> num;
+	int firstSum = 0, firstLastNum = 0, count = 1;
+	bool first = true;
+	while(num != 0){
+		int lastNum=0, sum = 0; 
+		
+		while(num != 0){
+			sum	+= num;
+			lastNum=num;
+			cin >> num;
 		}
-		cout << count << endl;
+		
+		
+		if(lastNum == firstLastNum and sum == firstSum )
+			++count;
+		// if is the first line just save the variables
+		if(first){
+			firstSum = sum;
+			firstLastNum = lastNum;
+			first = false;
+		}
+		cin >> num;
 	}
+	cout << count << endl;
 }
