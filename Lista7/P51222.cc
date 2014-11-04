@@ -3,15 +3,10 @@
 using namespace std;
 
 int number_of_digits(int n){
-	int count = 0;
-	if(n > 9){
-		n /= 10;
-		++count;
+	if(n < 10) return 1;
+	else {
+		return 1 + number_of_digits(n / 10);
 	}
-	
-	count += number_of_digits(n);
-	
-	return count;
 }
 
 int main(){
