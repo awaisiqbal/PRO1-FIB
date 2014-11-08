@@ -3,21 +3,33 @@
 using namespace std;
 
 
-int equals_sum(const vector<int>& u){
+bool equals_sum(const vector<int>& u){
 	int size = u.size();
+	int max = u[0] , min = u[0];
+	int max_index = 0, min_index = 0;
 	for(int i = 0; i < size; ++i ){
-		int sum = 0;
-		for(int j = 0; j < size; ++j ){
-			if(j != i) 
-				sum += u[j];
-		}
-		if (sum == u[i]) return i;
+		if(u[i] > max){
+			 max = u[i];
+			 max_index = i;
+			 
+		 } else if (u[i] < min ){
+			min = u[i];
+			min_index = i;
+		 }
 	}
-	return -1;
+	int sum_max = 0, sum_min;
+	for(int i = 0; i < size; ++i ){
+		if(i != max_index) sum_max += u[i];
+		if(i != min_index) sum_min += u[i];
+		
+	}
+	if (max == sum_max or min == sum_min){
+		 return true;
+	}
+		 
+	return false;
 }
-vector<int> get_vector(){
-	int n = 0;
-	cin >> n;
+vector<int> get_vector(int n){
 	vector<int> v (n);
 	for(int i = 0; i < n; ++i){
 		int u ;
@@ -39,31 +51,14 @@ void print_vector(const vector<int>& v){
 
 
 int main(){
-	vector<int> v = get_vector();
-	
-	//print_vector(v);
-	
-	
-	if (equals_sum(v) == -1){
-		cout << "NO" << endl;
+	int n;
+	while(cin >> n){
+		vector<int> v = get_vector(n);
+		if (equals_sum(v)){
+			cout << "YES" << endl;
+		}
+		else{
+			cout << "NO" << endl;
+		}
 	}
-	else{
-		cout << "YES" << endl;
-	}
-	
-	/*
-	vector<double> u  (5);
-	u[0] = 1;
-	u[1] = 2;
-	u[2] = 3;
-	u[3] = 4;
-	u[4] = 5;
-	
-	vector<double> v  (5);
-	v[0] = 1;
-	v[1] = 2;
-	v[2] = 3;
-	v[3] = 4;
-	v[4] = 5;
-	*/
 }
