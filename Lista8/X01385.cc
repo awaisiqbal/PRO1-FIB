@@ -2,68 +2,33 @@
 #include <vector>
 using namespace std;
 
-
-int count_equals(const vector<int>& v){
-	int size = v.size();
+int count_equals(int size){
+	
 	vector<int> u (size);
+	cin >> u[0];
+	for(int i = 1; i < size;++i)
+		u[i] = u[0];
 	int count = 1;
-	u[0] = v[0];
-	for(int i = 0; i < size; ++i ){
-		bool should_add = true;
-		for(int j = 0; j < size; ++j ){
-			if(v[i] == u[j]){
-				 should_add = false;
-			}
+	for(int i = 1; i < size; ++i ){
+		int n ;
+		cin >> n;
+		bool shouldAdd = true;
+		for(int j = 0; j < i; ++j){
+			if(u[j] == n) shouldAdd = false;
 		}
-		if(should_add){
-			 ++count;
-			 u[i] = v[i];
-		 }
+		if(shouldAdd){
+			u[i]= n;
+			++count;
+		}
 	}
 	return count;
-}
-vector<int> get_vector(){
-	int n = 0;
-	cin >> n;
-	vector<int> v (n);
-	for(int i = 0; i < n; ++i){
-		int u ;
-		cin >> u;
-		v[i] = u;
-	}
-	return v;
-}
-
-void print_vector(const vector<int>& v){
-	int size = v.size();
-	cout << "[ ";
-	for(int i = 0; i < size; ++i){
-		cout << v[i] ;
-		if(i != size -1)  cout << " , ";
-	}
-	cout << " ]" << endl;
 }
 
 
 int main(){
-	vector<int> v = get_vector();
 	
-	//print_vector(v);
-	
-	cout << count_equals(v) << endl;
-	/*
-	vector<double> u  (5);
-	u[0] = 1;
-	u[1] = 2;
-	u[2] = 3;
-	u[3] = 4;
-	u[4] = 5;
-	
-	vector<double> v  (5);
-	v[0] = 1;
-	v[1] = 2;
-	v[2] = 3;
-	v[3] = 4;
-	v[4] = 5;
-	*/
+	int n = 0;
+	while(cin >> n){
+		cout << count_equals(n) << endl;
+	}
 }
