@@ -19,8 +19,8 @@ vector<Punto> get_vector(int n){
 
 bool checkCond1(const vector<Punto>& v){
 	int size = v.size();
-	int x = v[0].x ;
-	int y = v[0].y ;
+	double x = v[0].x ;
+	double y = v[0].y ;
 	for(int i = 1; i < size ;++i){
 		if(v[i].x != x or v[i].y != y) return true;
 	}
@@ -29,32 +29,51 @@ bool checkCond1(const vector<Punto>& v){
 
 
 bool checkCond2(const vector<Punto>& v){
-	int sum_x = 0, sum_y = 0;
+	double sum_x = 0, sum_y = 0;
 	int size = v.size();
-	for(int i = 1; i < size ;++i){
+	for(int i = 0; i < size ;++i){
 		sum_x += v[i].x;
 		sum_y += v[i].y;
 	}
 	return sum_x == sum_y;
 }
 
-bool checkCond3(){
-	return false;
+bool checkCond3(const vector<Punto>& v,const Punto& p){
+	int size = v.size();
+	double x = p.x ;
+	double y = p.y ;
+	for(int i = 0; i < size ;++i){
+		if(v[i].x == x and v[i].y == y) return false;
+	}
+	return true;
 }
 
 bool baricentro (const vector<Punto>& v, Punto& b){
-	return false;
+	double sum_x = 0, sum_y = 0;
+	int size = v.size();
+	for(int i = 0; i < size ;++i){
+		sum_x += v[i].x;
+		sum_y += v[i].y;
+	}
+	b.x = sum_x / size;
+	b.y = sum_y / size;
+	cout.setf(ios::fixed);
+	cout.precision(2); 
+	cout << "baricentro: ("<< b.x << "," << b.y << ")" << endl;
+	return true;
 }
 
 int main(){
 	int n;
 	while(cin >> n){
 		vector<Punto> v = get_vector(n);
+		Punto p;
+		baricentro(v,p);
 		if(not(checkCond1(v))){
 			cout << "el vector no cumple la propiedad 1" << endl;
 		} else if (not(checkCond2(v))){
 			cout << "el vector no cumple la propiedad 2" << endl;
-		} else if(not (checkCond3(v))){
+		} else if(not (checkCond3(v,p))){
 			cout << "el vector no cumple la propiedad 3" << endl;
 		} else {
 			cout << "vector normalizado" << endl;
