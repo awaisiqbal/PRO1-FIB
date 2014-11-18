@@ -17,27 +17,30 @@ void move(const double &x, const double &y, Circle& c){
 void scale(const int &scale_to, Circle& c){
 	c.rad *= scale_to;
 }
-     
+
+double distancia(const Circle& c1, const Circle& c2) {
+    double x1 = c1.centerX - c2.centerX;
+    double y1 = c2.centerY - c2.centerY;
+    double p = sqrt(x1*x1 + y1*y1);
+    return p;
+}
+
 int relation(const Circle& c1, const Circle& c2){
-	int distance = sqrt(pow((c1.centerX - c2.centerX),2) + pow((c1.centerY - c2.centerY),2));
-	int radSum = c2.rad + c1.rad; 
-	//cout << "distance: " << distance << "  \t  radSum: " << radSum  << endl;
-	if(distance >= radSum){
+	if(distancia(c1,c2) < c1.rad - c2.rad){
 		// no overlap
-		return 4;
+		return 2;
 	}
-	else if(distance <= c2.rad - c1.rad){
+	else if(distancia(c1,c2) < c2.rad - c1.rad){
 		// c1 inside c2
 		return 1;
 	}
-	else if (distance < c1.rad - c2.rad){
+	else if (distancia(c1,c2) < c2.rad + c1.rad){
 		// c2 inside c1
-		return 2;
-	}
-	else {
 		return 3;
 	}
-	return -1;
+	else {
+		return 0;
+	}
 }
      
 void check(const Circle& c1, const Circle& c2){
