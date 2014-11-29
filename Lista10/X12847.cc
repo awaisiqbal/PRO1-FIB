@@ -7,22 +7,35 @@ typedef vector< vector<bool> > Tablero;
 
 
 void leer_colocar_barcos(Tablero& t){
-		for(int i = 1; i <= 10; ++i){
+	/*
+	char c, dir; 
+	int pos, lon; 
+	cin >> c;
+	cin >> pos;
+	cin >> lon;
+	cin >> dir;
+	cout << "c: " << c << "\tpos: " << pos << "\tlon: " << lon << "\tdir: " << dir <<  endl;*/
+	
+		for(int i = 0; i < 10; ++i){
 			char c, dir; 
 			int pos, lon; 
-			cin >> c >> pos >> lon >> dir;
-			
+			cin >> c;
+			cin >> pos;
+			cin >> lon;
+			cin >> dir;
+			cout << "c: " << c << "\tpos: " << pos << "\tlon: " << lon << "\tdir: " << dir <<  endl;
 			if(dir == 'h'){
-				cout << c << pos << lon << dir;
-				for(int j= 0; i < lon; ++j){
-					//t[(c-'a')+j][pos-1] = true;
+				cout << "Horizontal" << endl;
+				for(int j= 0; j < lon; ++j){
+					t[(c-'a')][(pos-1)+j] = true;
 				}
 			} else {
 				for(int j = 0; j < lon; ++j){
-					//t[c-'a'][(pos - 1) + j] = true;
+					t[(c-'a')+j][pos-1] = true;
 				}
 			}
 		}
+	
 }
 void escribir_tauler(Tablero& t){
 	int n = t.size();
@@ -32,19 +45,18 @@ void escribir_tauler(Tablero& t){
 	}
 	cout << endl;
 	for(int i = 0; i < n; ++i){
-		cout << char(i + 'a') << "\t " ;
+		cout << char(i + 'a') << " " ;
 		for(int j = 0; j < n; ++j){
 			if(t[i][j]){
 				cout << "X";
 			} else {
 				cout << ".";
 			}
-			
 		}
 		cout << endl;
 	}
-	
 }
+
 
 
 int main(){
